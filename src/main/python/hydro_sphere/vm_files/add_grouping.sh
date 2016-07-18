@@ -22,6 +22,15 @@ echo "60mins" | sudo tee /etc/mesos-slave/gc_delay
 # Optionally you can change the mesos work directory from /tmp
 echo "/opt/mesos" | sudo tee /etc/mesos-slave/work_dir
 
+# Increase max number of memory map areas for processes
+# Full doc
+# https://www.kernel.org/doc/Documentation/sysctl/vm.txt
+echo "600000" | sudo tee /proc/sys/vm/max_map_count
+
+# Also increase max pid
+# For more info "man proc" and search "pid_max"
+echo "200000" | sudo tee /proc/sys/kernel/pid_max
+
 # Increase FD limits
 # Add to the end of /etc/security/limits.conf
 echo "
